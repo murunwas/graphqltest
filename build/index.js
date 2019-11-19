@@ -13,16 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
-const typeorm_1 = require("typeorm");
 const express_1 = __importDefault(require("express"));
 const apollo_server_express_1 = require("apollo-server-express");
 const type_graphql_1 = require("type-graphql");
 const HelloWorldResolver_1 = require("./resolvers/HelloWorldResolver");
 const MovieResolver_1 = require("./resolvers/MovieResolver");
 const CryptoResolver_1 = require("./resolvers/CryptoResolver");
+const db_1 = __importDefault(require("./config/db"));
 (() => __awaiter(void 0, void 0, void 0, function* () {
     const app = express_1.default();
-    yield typeorm_1.createConnection();
+    yield db_1.default();
     const apolloServer = new apollo_server_express_1.ApolloServer({
         schema: yield type_graphql_1.buildSchema({
             resolvers: [HelloWorldResolver_1.HelloWorldResolver, MovieResolver_1.MovieResolver, CryptoResolver_1.CryptoResolver]
