@@ -10,7 +10,7 @@ import dbConnection from "./config/db"
 (async () => {
   const app = express();
 
-  await dbConnection();
+  await dbConnection(__dirname);
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({

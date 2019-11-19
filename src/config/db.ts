@@ -1,22 +1,19 @@
 import { createConnection } from "typeorm";
-import path from "path"
-
-console.log(path.resolve(__dirname));
-console.log(process.env.PWD);
 
 
 
-async function dbConnection() {
+
+async function dbConnection(path:string) {
     await createConnection({
         "type": "sqlite",
         "database": "database.sqlite",
         "synchronize": true,
         "logging": true,
-        "entities": [process.env.PWD+"/entity/**/*.*"],
+        "entities": [path+"/entity/**/*.*"],
         "migrations": ["src/migration/**/*.ts"],
         "subscribers": ["src/subscriber/**/*.ts"],
         "cli": {
-            "entitiesDir": process.env.PWD+"/entity",
+            "entitiesDir": path+"/entity",
             "migrationsDir": "src/migration",
             "subscribersDir": "src/subscriber"
         }
